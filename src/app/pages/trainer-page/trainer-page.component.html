@@ -1,7 +1,10 @@
-<div class="trainer-page">
-  <h1>Welcome, {{ trainerName }}!</h1>
-  <h2>Your Collected Pokemon:</h2>
+<div class="trainer-container">
+  <h2>{{ trainerName }}'s Pokémon</h2>
   <ul>
-    <li *ngFor="let pokemon of trainerPokemons">{{ pokemon.name }}</li>
+    <li *ngFor="let pokemon of collectedPokemon">
+      <img [src]="pokemon.image" alt="{{ pokemon.name }}" />
+      <span>{{ pokemon.name }}</span>
+      <button (click)="removePokemon(pokemon)">Remove</button>
+    </li>
   </ul>
 </div>

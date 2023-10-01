@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Trainer } from '../models/trainer.model';
+import { StorageUtil } from '../utils/storage.util';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrainerService {
-  private baseUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
   private apiKey = environment.apiKey;
 
   constructor(private http: HttpClient) {}
 
-  // Method to save Trainer name to the Trainer API
-  saveTrainerName(trainerName: string): Observable<any> {
-    const headers = new HttpHeaders().set('X-API-KEY', this.apiKey);
-    return this.http.post(
-      `${this.baseUrl}/trainer`,
-      { trainerName },
-      { headers }
-    );
+  getTrainer(id: number): Observable<Trainer> {
+    const url = `${this.apiUrl}/${id}`;
+    const headers = new HttpHeaders().set('x-api-key', this.apiKey);
+
+    return this.http.get<Trainer>(url, { headers });
   }
 
-  // Method to fetch Trainer collected Pokémon
-  getTrainerPokemons(): Observable<any> {
-    const headers = new HttpHeaders().set('X-API-KEY', this.apiKey);
-    return this.http.get(`${this.baseUrl}/trainer/pokemons`, { headers });
+  saveTrainer(trainer: Trainer): void {
+    const url = `${this.apiUrl}/${trainer.id}`;
+    const headers = new HttpHeaders().set('x-api-key', this.apiKey);
+
+    this.http.put(url, trainer, { headers }).subscribe(
+      () => {
+        // Successfully saved, update local storage if needed
+        StorageUtil.writeToLocalStorage('trainer', trainer);
+      },
+      (error) => {
+        console.error('Failed to save Trainer', error);
+      }
+    );
   }
 }
