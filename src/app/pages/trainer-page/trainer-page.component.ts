@@ -20,38 +20,39 @@ export class TrainerPageComponent implements OnInit {
     const storedName =
       localStorage.getItem('trainerName') ||
       sessionStorage.getItem('trainerName');
+      
 
     // Check for null before assignment
     if (storedName !== null) {
       this.trainerName = storedName;
     }
 
-    // Fetch Trainer data
-    this.trainerService.getTrainer(1).subscribe(
-      (data) => {
-        // Check for null before assignment
-        if (data !== null) {
-          this.trainer = data;
-        }
-      },
-      (error) => {
-        console.error('Error fetching Trainer data:', error);
-      }
-    );
-  }
+  //   // Fetch Trainer data
+  //   this.trainerService.getTrainer(1).subscribe(
+  //     (data) => {
+  //       // Check for null before assignment
+  //       if (data !== null) {
+  //         this.trainer = data;
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching Trainer data:', error);
+  //     }
+  //   );
+  // }
 
-  releasePokemon(pokemonName: string): void {
-    if (!this.trainer) {
-      return;
-    }
+  // releasePokemon(pokemonName: string): void {
+  //   if (!this.trainer) {
+  //     return;
+  //   }
 
-    const index = this.trainer.pokemon.findIndex(
-      (pokemon) => pokemon.name === pokemonName
-    );
-    if (index !== -1) {
-      this.trainer.pokemon.splice(index, 1);
+  //   const index = this.trainer.pokemon.findIndex(
+  //     (pokemon) => pokemon.name === pokemonName
+  //   );
+  //   if (index !== -1) {
+  //     this.trainer.pokemon.splice(index, 1);
 
-      this.trainerService.saveTrainer(this.trainer);
-    }
-  }
-}
+  //     this.trainerService.saveTrainer(this.trainer);
+  //   }
+  // }
+  }}

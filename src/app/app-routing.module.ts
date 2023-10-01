@@ -18,9 +18,9 @@ const routes: Routes = [
     component: LoginPage,
   },
   {
-    path: "pokemon",
-    component: PokemonPage,
-    canActivate: [ AuthGuard ]
+    path: 'pokemon-catalouge',
+    component: PokemonCataloguePageComponent,
+    canActivate: [AuthGuard],
   }
 ];
 

@@ -23,6 +23,8 @@ export class PokemonCataloguePageComponent implements OnInit {
     this.pokemonService.getPokemonList().subscribe(
       (data) => {
         this.pokemonList = data.results;
+        console.log("HERE POKEMONLIST")
+        console.log(this.pokemonList)
       },
       (error) => {
         console.error('Error fetching Pokémon data:', error);
@@ -31,10 +33,11 @@ export class PokemonCataloguePageComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
-    this.trainerService.addPokemonToCollection(pokemon);
+    // this.trainerService.addPokemonToCollection(pokemon);
   }
 
   getPokemonImageUrl(pokemonId: number): string {
+    console.log(pokemonId)
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
   }
 }

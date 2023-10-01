@@ -9,7 +9,6 @@ import { LoginPage } from './pages/login/login.page';
 import { PokemonPage } from './pages/pokemon/pokemon.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginService } from './services/login.service';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { TrainerPageComponent } from './pages/trainer-page/trainer-page.component';
 import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/pokemon-catalogue-page.component';
 
@@ -19,7 +18,6 @@ import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/po
     LoginPage,
     LoginFormComponent,
     PokemonPage,
-    LandingPageComponent,
     TrainerPageComponent,
     PokemonCataloguePageComponent,
     // Add other components here
