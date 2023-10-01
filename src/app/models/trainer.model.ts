@@ -1,7 +1,7 @@
 import { Pokemon } from "./pokemon.model"
 
 export interface Trainer {
-    id?: number,
+    id: number,
     username: string,
     pokemon: Pokemon[]
 }

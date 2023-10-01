@@ -49,6 +49,7 @@ export class LoginService {
 
   private createTrainer(username: string): Trainer {
     let trainer: Trainer = {
+      id: 0,
       username: username,
       pokemon: []
     }
