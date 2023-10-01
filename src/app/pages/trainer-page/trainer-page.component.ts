@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Trainer } from '../../models/trainer.model';
 import { TrainerService } from '../../services/trainer.service';
 import { Pokemon } from '../../models/pokemon.model';
-
+import { StorageUtil } from '../../utils/storage.util';
+import { StorageKeys } from '../../enums/storage-keys.enum';
+import { TrainerCollectionService } from 'src/app/services/trainer-collection.service';
 @Component({
   selector: 'app-trainer-page',
   templateUrl: './trainer-page.component.html',
@@ -15,20 +17,17 @@ export class TrainerPageComponent implements OnInit {
   trainer: Trainer | null = null; // Initialize to an empty object
   ownedPokemons: Pokemon[] = [];
 
-  constructor(private trainerService: TrainerService) {}
+  constructor(private trainerService: TrainerService,
+              private trainerCollectionService: TrainerCollectionService) {}
 
   ngOnInit(): void {
     // Get Trainer's name from local storage
-    const storedName = localStorage.getItem('trainerName');
-
-    // Check for null before assignment
-    if (storedName !== null) {
-      this.trainerName = storedName;
-    }
+  
+    this.trainerName = StorageUtil.readStorage<Trainer>(StorageKeys.Trainer)?.username!
 
     // Retrieve trainer data from the TrainerService
     this.trainer = this.trainerService.trainer || null;
-
+    console.log(1)
     this.trainerService.getTrainerByUsername(this.trainerName).subscribe(
       (data) => {
         if (data !== null) {
@@ -49,7 +48,7 @@ export class TrainerPageComponent implements OnInit {
     );
   }
 
-  releasePokemon(pokemonName: string): void {
-    // Implement the logic to release a Pokemon if needed
+  releasePokemon(pokemon: Pokemon): void {
+    this.trainerCollectionService.removeFromCollection(pokemon)
   }
 }

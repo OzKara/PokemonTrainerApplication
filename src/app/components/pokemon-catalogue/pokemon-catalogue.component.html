@@ -4,6 +4,8 @@
   <div class="pokemon-card" *ngFor="let pokemon of pokemonList">
     <img [src]="pokemon.image" alt="{{ pokemon.name }}" />
     <h3>{{ pokemon.name }}</h3>
+    <h3>{{!isInCollection(pokemon)}}</h3>
+    
 
     <!-- Display "Add to Collection" or "Release" button based on isTrainerPage input -->
     <button
@@ -14,7 +16,9 @@
     </button>
 
     <ng-template #addToCollection>
-      <button (click)="addToCollectionClick.emit(pokemon)">
+      <button
+      *ngIf="!isInCollection(pokemon)" 
+      (click)="addToCollectionClick.emit(pokemon)">
         Add to Collection
       </button>
     </ng-template>

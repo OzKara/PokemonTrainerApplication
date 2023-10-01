@@ -26,12 +26,14 @@ export class TrainerCollectionService {
     return this.trainerService.updatePokemon(newCollection)
   }
 
-  public inCollection(pokemon: Pokemon) {
-    return this.trainer?.pokemon.find((pokemonInCollection: Pokemon) => pokemonInCollection === pokemon)
+  public inCollection(pokemon: Pokemon): boolean | undefined {
+    console.log(this.trainer?.pokemon)
+    return JSON.stringify(this.trainer?.pokemon).includes(pokemon.name)
   }
 
   public removeFromCollection(pokemon: Pokemon): void {
-    const newCollection = this.trainer?.pokemon.filter((pokemonInCollection: Pokemon) => pokemonInCollection !== pokemon)
+    
+    const newCollection = this.trainer?.pokemon.filter((pokemonInCollection: Pokemon) => pokemonInCollection.name !== pokemon.name)
     this.trainerService.updatePokemon(newCollection!)
   }
 }
