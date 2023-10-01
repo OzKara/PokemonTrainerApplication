@@ -1,0 +1,11 @@
+<form #createLoginForm="ngForm" (ngSubmit)="onSubmit(createLoginForm)">
+    <input type="text" 
+    ngModel
+    #username="ngModel"
+    name = "username" id="username" 
+    required
+    placeholder="Enter your name"/>
+    <button class="bg-blue-500 rounded-md px-1 py-1" type="submit">
+        Login
+    </button>
+</form>
