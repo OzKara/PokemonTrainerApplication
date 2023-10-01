@@ -11,6 +11,7 @@ import { Pokemon } from '../../models/pokemon.model';
   styleUrls: ['./pokemon-catalogue-page.component.scss'],
 })
 export class PokemonCataloguePageComponent implements OnInit {
+  showButton: boolean = true;
   pokemonList: Pokemon[] = [];
 
   constructor(
@@ -43,7 +44,8 @@ export class PokemonCataloguePageComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
-    // this.trainerService.addPokemonToCollection(pokemon);
+    // Implement your logic for adding Pokemon to the collection here
+    console.log(`Added ${pokemon.name} to collection.`);
   }
 
   getPokemonImageUrl(pokemonId: number): string {

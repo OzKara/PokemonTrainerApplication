@@ -1,0 +1,11 @@
+<div class="pokemon-catalog">
+  <h2>Pokémon Catalogue</h2>
+
+  <div class="pokemon-card" *ngFor="let pokemon of pokemonList">
+    <img [src]="pokemon.image" alt="{{ pokemon.name }}" />
+    <h3>{{ pokemon.name }}</h3>
+    <button (click)="addToCollectionClick.emit(pokemon)">
+      Add to Collection
+    </button>
+  </div>
+</div>

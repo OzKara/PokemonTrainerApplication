@@ -1,0 +1,13 @@
+<nav class="pokemon-navbar">
+  <div class="pokemon-navbar-logo">
+    <!-- <img src="../../../assets/images/pokemon-logo.png" alt="Pokemon Logo" /> -->
+  </div>
+  <div class="pokemon-navbar-button">
+    <button *ngIf="isTrainerPage" (click)="goToCataloguePage()">
+      Catalogue Page
+    </button>
+    <button *ngIf="isCataloguePage" (click)="goToTrainerPage()">
+      Trainer Page
+    </button>
+  </div>
+</nav>
