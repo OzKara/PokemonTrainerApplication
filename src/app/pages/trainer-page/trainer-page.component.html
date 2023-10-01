@@ -1,0 +1,20 @@
+<div class="trainer-container">
+  <h2>Welcome, {{ trainerName }}!</h2>
+
+  <div *ngIf="trainer && trainer.pokemon && trainer.pokemon.length > 0">
+    <h3>Your Pokémon Collection:</h3>
+    <ul>
+      <li *ngFor="let pokemon of trainer.pokemon">
+        {{ pokemon.name }}
+        <button (click)="releasePokemon(pokemon.name)">Release</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="trainer && (!trainer.pokemon || trainer.pokemon.length === 0)">
+    <p>
+      You haven't collected any Pokémon yet. Go to the Pokémon Catalogue to
+      start collecting!
+    </p>
+  </div>
+</div>
