@@ -27,14 +27,18 @@ export class TrainerService {
   }
 
   public updatePokemon(pokemonCollection: Pokemon[]) {
+  
     const headers = new HttpHeaders().set('x-api-key', apiKey)
     const url = (`${apiTrainersUrl}/${this.trainer?.id}`)
     this.trainer!.pokemon = pokemonCollection
-    this.http.patch(url, {
-      pokemon: pokemonCollection
-    }, {headers})
+    const body = {"pokemon": pokemonCollection}
+    this.http.patch(url, 
+      body
+    , {headers}).subscribe((response) => {
+      console.log("HELLO", response);
+      })
 
-  }
+    }
 
   constructor(
     private readonly http: HttpClient

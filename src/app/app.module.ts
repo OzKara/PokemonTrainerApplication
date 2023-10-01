@@ -11,6 +11,9 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { LoginService } from './services/login.service';
 import { TrainerPageComponent } from './pages/trainer-page/trainer-page.component';
 import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/pokemon-catalogue-page.component';
+import { TrainerService } from './services/trainer.service';
+import { PokemonService } from './services/pokemon.service';
+import { TrainerCollectionService } from './services/trainer-collection.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,7 @@ import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/po
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [LoginService],
+  providers: [LoginService, TrainerService, PokemonService, TrainerCollectionService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

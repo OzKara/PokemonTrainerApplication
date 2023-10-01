@@ -21,16 +21,16 @@ export class TrainerCollectionService {
 
   private trainer?: Trainer = this.trainerService.trainer
 
-  private addToCollection(pokemon: Pokemon) {
+  public addToCollection(pokemon: Pokemon) {
     const newCollection: Pokemon[] = [...this.trainer!.pokemon, pokemon]
-    this.trainerService.updatePokemon(newCollection)
+    return this.trainerService.updatePokemon(newCollection)
   }
 
-  private inCollection(pokemon: Pokemon) {
+  public inCollection(pokemon: Pokemon) {
     return this.trainer?.pokemon.find((pokemonInCollection: Pokemon) => pokemonInCollection === pokemon)
   }
 
-  private removeFromCollection(pokemon: Pokemon): void {
+  public removeFromCollection(pokemon: Pokemon): void {
     const newCollection = this.trainer?.pokemon.filter((pokemonInCollection: Pokemon) => pokemonInCollection !== pokemon)
     this.trainerService.updatePokemon(newCollection!)
   }
