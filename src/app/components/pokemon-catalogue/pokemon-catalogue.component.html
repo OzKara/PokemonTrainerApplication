@@ -9,7 +9,7 @@
 
     <!-- Display "Add to Collection" or "Release" button based on isTrainerPage input -->
     <button
-      *ngIf="isTrainerPage; else addToCollection"
+      *ngIf="isInCollection(pokemon) && isTrainerPage; else addToCollection"
       (click)="releasePokemonClick.emit(pokemon)"
     >
       Release
@@ -17,7 +17,7 @@
 
     <ng-template #addToCollection>
       <button
-      *ngIf="!isInCollection(pokemon)" 
+      *ngIf="!isInCollection(pokemon) && !isTrainerPage" 
       (click)="addToCollectionClick.emit(pokemon)">
         Add to Collection
       </button>
