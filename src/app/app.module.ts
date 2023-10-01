@@ -11,8 +11,10 @@ import { LoginService } from './services/login.service';
 import { TrainerPageComponent } from './pages/trainer-page/trainer-page.component';
 import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/pokemon-catalogue-page.component';
 import { PokemonCatalogComponent } from './components/pokemon-catalogue/pokemon-catalogue.component';
-import { PokemonService } from './services/pokemon.service';
 import { NavBarComponent } from './components/navbar/navbar.component';
+import { TrainerService } from './services/trainer.service';
+import { PokemonService } from './services/pokemon.service';
+import { TrainerCollectionService } from './services/trainer-collection.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { NavBarComponent } from './components/navbar/navbar.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [LoginService, PokemonService],
+  providers: [LoginService, TrainerService, PokemonService, TrainerCollectionService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

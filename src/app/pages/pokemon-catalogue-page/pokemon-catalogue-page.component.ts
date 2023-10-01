@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { PokemonService } from '../../services/pokemon.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Pokemon } from '../../models/pokemon.model';
+import { TrainerCollectionService } from 'src/app/services/trainer-collection.service';
+import { Trainer } from 'src/app/models/trainer.model';
 
 @Component({
   selector: 'app-pokemon-catalogue-page',
@@ -16,7 +18,8 @@ export class PokemonCataloguePageComponent implements OnInit {
 
   constructor(
     private pokemonService: PokemonService,
-    private trainerService: TrainerService
+    private trainerService: TrainerService,
+    private trainerCollectionService: TrainerCollectionService
   ) {}
 
   ngOnInit(): void {
@@ -44,8 +47,7 @@ export class PokemonCataloguePageComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
-    // Implement your logic for adding Pokemon to the collection here
-    console.log(`Added ${pokemon.name} to collection.`);
+    this.trainerCollectionService.addToCollection(pokemon)
   }
 
   getPokemonImageUrl(pokemonId: number): string {
