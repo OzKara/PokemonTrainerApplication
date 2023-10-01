@@ -8,7 +8,10 @@ import { Pokemon } from '../../models/pokemon.model';
 })
 export class PokemonCatalogComponent {
   @Input() pokemonList: Pokemon[] = [];
+  @Input() isTrainerPage: boolean = false; // New input for Trainer Page
   @Output() addToCollectionClick: EventEmitter<Pokemon> =
+    new EventEmitter<Pokemon>();
+  @Output() releasePokemonClick: EventEmitter<Pokemon> =
     new EventEmitter<Pokemon>();
 
   // Emit the addToCollectionClick event with the selected Pokemon
