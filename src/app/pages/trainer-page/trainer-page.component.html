@@ -1,10 +1,20 @@
 <div class="trainer-container">
-  <h2>{{ trainerName }}'s Pokémon</h2>
-  <ul>
-    <li *ngFor="let pokemon of collectedPokemon">
-      <img [src]="pokemon.image" alt="{{ pokemon.name }}" />
-      <span>{{ pokemon.name }}</span>
-      <button (click)="removePokemon(pokemon)">Remove</button>
-    </li>
-  </ul>
+  <h2>Welcome, {{ trainerName }}!</h2>
+
+  <div *ngIf="trainer && trainer.pokemon && trainer.pokemon.length > 0">
+    <h3>Your Pokémon Collection:</h3>
+    <ul>
+      <li *ngFor="let pokemon of trainer.pokemon">
+        {{ pokemon.name }}
+        <button (click)="releasePokemon(pokemon.name)">Release</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="trainer && (!trainer.pokemon || trainer.pokemon.length === 0)">
+    <p>
+      You haven't collected any Pokémon yet. Go to the Pokémon Catalogue to
+      start collecting!
+    </p>
+  </div>
 </div>

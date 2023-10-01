@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { PokemonService } from '../../services/pokemon.service';
+import { TrainerService } from '../../services/trainer.service';
+import { Pokemon } from '../../models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-catalogue-page',
@@ -8,41 +11,30 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./pokemon-catalogue-page.component.scss'],
 })
 export class PokemonCataloguePageComponent implements OnInit {
-  pokemonList: any[] = []; // You can define a Pokemon interface if needed
+  pokemonList: Pokemon[] = [];
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private pokemonService: PokemonService,
+    private trainerService: TrainerService
+  ) {}
 
-  ngOnInit() {
-    // Check if the trainerName exists in local storage
-    const trainerName = localStorage.getItem('trainerName');
-    if (!trainerName) {
-      this.router.navigate(['/']);
-    }
-
-    // Fetch Pokémon data from the PokeAPI (example using HttpClient)
-    this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=20').subscribe(
-      (response) => {
-        this.pokemonList = response.results.map((pokemon: any) => ({
-          name: pokemon.name,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url
-            .split('/')
-            .slice(-2, -1)}.png`,
-          details: null, // You can fetch details on-demand
-        }));
+  ngOnInit(): void {
+    // Fetch a list of Pokemon from your API or PokeAPI
+    this.pokemonService.getPokemonList().subscribe(
+      (data) => {
+        this.pokemonList = data.results;
       },
       (error) => {
-        console.error('Failed to fetch Pokémon data', error);
+        console.error('Error fetching Pokémon data:', error);
       }
     );
   }
 
-  collectPokemon(pokemon: any) {
-    // Implement collecting Pokemon and updating Trainer API here
-    // You can use the same approach as in the Trainer Page
+  addToCollection(pokemon: Pokemon): void {
+    this.trainerService.addPokemonToCollection(pokemon);
   }
 
-  showDetails(pokemon: any) {
-    // Implement showing additional details (if needed) here
-    // You can fetch details from the PokeAPI on-demand
+  getPokemonImageUrl(pokemonId: number): string {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
   }
 }

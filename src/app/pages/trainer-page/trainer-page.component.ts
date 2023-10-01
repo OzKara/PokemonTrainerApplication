@@ -1,5 +1,8 @@
+// src/app/pages/trainer-page/trainer-page.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Trainer } from '../../models/trainer.model';
+import { TrainerService } from '../../services/trainer.service';
 
 @Component({
   selector: 'app-trainer-page',
@@ -8,39 +11,47 @@ import { Router } from '@angular/router';
 })
 export class TrainerPageComponent implements OnInit {
   trainerName: string = '';
-  collectedPokemon: any[] = []; // You can define a Pokemon interface if needed
+  trainer: Trainer | null = null; // Initialize to an empty object
 
-  constructor(private router: Router) {}
+  constructor(private trainerService: TrainerService) {}
 
-  ngOnInit() {
-    // Check if the trainerName exists in local storage
-    const storedName = localStorage.getItem('trainerName');
-    this.trainerName = storedName !== null ? storedName : '';
+  ngOnInit(): void {
+    // Get Trainer's name from local storage
+    const storedName =
+      localStorage.getItem('trainerName') ||
+      sessionStorage.getItem('trainerName');
 
-    // Check if there are collected Pokémon in local storage
-    const storedPokemon = localStorage.getItem('collectedPokemon');
-    if (storedPokemon) {
-      this.collectedPokemon = JSON.parse(storedPokemon);
-    } else {
-      this.collectedPokemon = [];
+    // Check for null before assignment
+    if (storedName !== null) {
+      this.trainerName = storedName;
     }
 
-    // Redirect to the Landing Page if the trainerName is not found
-    if (!this.trainerName) {
-      this.router.navigate(['/']);
-    }
+    // Fetch Trainer data
+    this.trainerService.getTrainer(1).subscribe(
+      (data) => {
+        // Check for null before assignment
+        if (data !== null) {
+          this.trainer = data;
+        }
+      },
+      (error) => {
+        console.error('Error fetching Trainer data:', error);
+      }
+    );
   }
 
-  removePokemon(pokemon: any) {
-    // Remove the Pokémon from the collection
-    const index = this.collectedPokemon.indexOf(pokemon);
+  releasePokemon(pokemonName: string): void {
+    if (!this.trainer) {
+      return;
+    }
+
+    const index = this.trainer.pokemon.findIndex(
+      (pokemon) => pokemon.name === pokemonName
+    );
     if (index !== -1) {
-      this.collectedPokemon.splice(index, 1);
-      // Update the collection in local storage
-      localStorage.setItem(
-        'collectedPokemon',
-        JSON.stringify(this.collectedPokemon)
-      );
+      this.trainer.pokemon.splice(index, 1);
+
+      this.trainerService.saveTrainer(this.trainer);
     }
   }
 }

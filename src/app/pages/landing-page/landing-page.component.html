@@ -1,14 +1,8 @@
-<div class="landing-container">
-  <h2>Welcome to the Pokémon Trainer App</h2>
-  <form (submit)="onSubmit()">
-    <label for="trainerName">Enter your Trainer Name:</label>
-    <input
-      type="text"
-      id="trainerName"
-      [(ngModel)]="trainerName"
-      name="trainerName"
-      required
-    />
-    <button type="submit">Start</button>
-  </form>
+<div class="landing-page">
+  <h1>Welcome to the Pokémon Trainer App</h1>
+  <p>Enter your Trainer name to get started:</p>
+  <div class="input-container">
+    <input type="text" [(ngModel)]="trainerName" placeholder="Trainer Name" />
+    <button (click)="createTrainer()">Create Trainer</button>
+  </div>
 </div>

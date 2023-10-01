@@ -12,17 +12,35 @@ export class LandingPageComponent {
 
   constructor(private router: Router, private trainerService: TrainerService) {}
 
-  onSubmit() {
-    if (this.trainerName.trim() !== '') {
-      // Save the Trainer's name to local storage
-      localStorage.setItem('trainerName', this.trainerName);
+  createTrainer(): void {
+    // Check if the trainer with the same username already exists
+    this.trainerService.getTrainerByUsername(this.trainerName).subscribe(
+      (existingTrainer) => {
+        if (existingTrainer) {
+          console.log(
+            'Trainer with this username already exists:',
+            existingTrainer
+          );
+        } else {
+          const newTrainer = {
+            username: this.trainerName,
+          };
 
-      // Use the TrainerService to save the Trainer data (optional)
-      const trainer = { id: 1, username: this.trainerName, pokemon: [] };
-      this.trainerService.saveTrainer(trainer);
-
-      // Redirect to the Pokémon Catalogue Page
-      this.router.navigate(['/pokemon-catalogue']);
-    }
+          // Make a POST request to create the new trainer
+          this.trainerService.createTrainer(newTrainer.username).subscribe(
+            (response) => {
+              // Successfully created the trainer
+              console.log('Trainer created:', response);
+            },
+            (error) => {
+              console.error('Error creating trainer:', error);
+            }
+          );
+        }
+      },
+      (error) => {
+        console.error('Error checking username availability:', error);
+      }
+    );
   }
 }
