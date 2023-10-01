@@ -15,4 +15,9 @@ export class PokemonService {
     const url = `${this.apiUrl}/pokemon?limit=10`; // Example: Limiting to 10 Pokemon
     return this.http.get(url);
   }
+
+  getPokemonDetailsById(pokemonId: number): Observable<any> {
+    const url = `${this.apiUrl}/pokemon/${pokemonId}`;
+    return this.http.get(url);
+  }
 }

@@ -22,14 +22,24 @@ export class PokemonCataloguePageComponent implements OnInit {
     // Fetch a list of Pokemon from your API or PokeAPI
     this.pokemonService.getPokemonList().subscribe(
       (data) => {
-        this.pokemonList = data.results;
-        console.log("HERE POKEMONLIST")
-        console.log(this.pokemonList)
+        // Extract the Pokemon IDs and names
+        this.pokemonList = data.results.map((pokemon: any) => ({
+          id: this.extractPokemonIdFromUrl(pokemon.url),
+          name: pokemon.name,
+          image: this.getPokemonImageUrl(
+            this.extractPokemonIdFromUrl(pokemon.url)
+          ),
+        }));
       },
       (error) => {
-        console.error('Error fetching Pokémon data:', error);
+        console.error('Error fetching Pokemon data:', error);
       }
     );
+  }
+
+  private extractPokemonIdFromUrl(url: string): number {
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2], 10);
   }
 
   addToCollection(pokemon: Pokemon): void {
@@ -37,7 +47,7 @@ export class PokemonCataloguePageComponent implements OnInit {
   }
 
   getPokemonImageUrl(pokemonId: number): string {
-    console.log(pokemonId)
+    console.log(pokemonId);
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
   }
 }
