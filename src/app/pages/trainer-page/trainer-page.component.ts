@@ -1,5 +1,3 @@
-// src/app/pages/trainer-page/trainer-page.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { Trainer } from '../../models/trainer.model';
 import { TrainerService } from '../../services/trainer.service';
@@ -18,42 +16,14 @@ export class TrainerPageComponent implements OnInit {
 
   ngOnInit(): void {
     // Get Trainer's name from local storage
-    const storedName =
-      localStorage.getItem('trainerName') ||
-      sessionStorage.getItem('trainerName');
+    const storedName = localStorage.getItem('trainerName');
 
     // Check for null before assignment
     if (storedName !== null) {
       this.trainerName = storedName;
     }
 
-    //   // Fetch Trainer data
-    //   this.trainerService.getTrainer(1).subscribe(
-    //     (data) => {
-    //       // Check for null before assignment
-    //       if (data !== null) {
-    //         this.trainer = data;
-    //       }
-    //     },
-    //     (error) => {
-    //       console.error('Error fetching Trainer data:', error);
-    //     }
-    //   );
-    // }
-
-    // releasePokemon(pokemonName: string): void {
-    //   if (!this.trainer) {
-    //     return;
-    //   }
-
-    //   const index = this.trainer.pokemon.findIndex(
-    //     (pokemon) => pokemon.name === pokemonName
-    //   );
-    //   if (index !== -1) {
-    //     this.trainer.pokemon.splice(index, 1);
-
-    //     this.trainerService.saveTrainer(this.trainer);
-    //   }
-    // }
+    // Retrieve trainer data from the TrainerService
+    this.trainer = this.trainerService.trainer || null;
   }
 }
