@@ -8,7 +8,7 @@ This is a web application simulating a simplified version version of pokemon mad
 
 ## Content
 
-The project includes the files necessary for the project, as well the component tree for the application
+The project includes the files necessary for the project, as well the component tree for the application in the assets folder
 
 ## Installation
 
@@ -22,3 +22,4 @@ Configure an API key and add it to the an environment file
 ## Usage
 
 After installing the project yourself, you can run it by using "ng serve -o"
+The project can also be tested through vercel with the following link https://pokemon-trainer-application.vercel.app/login
