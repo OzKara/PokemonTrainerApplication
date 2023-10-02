@@ -22,4 +22,4 @@ Configure an API key and add it to the an environment file
 ## Usage
 
 After installing the project yourself, you can run it by using "ng serve -o"
-The project can also be tested through vercel with the following link https://pokemon-trainer-application.vercel.app/login
+The project can also be tested through vercel with the following link https://pokemon-trainer-application-xi.vercel.app/login
