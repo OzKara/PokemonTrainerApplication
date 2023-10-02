@@ -1,27 +1,24 @@
 # PokemonTrainerApplication
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+By Julian-Sander Magnussen & Ozan Kara
 
-## Development server
+## Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This is a web application simulating a simplified version version of pokemon made with Angular. The application lets a user (trainer) log in, and collect and release pokemon from a catalogue. PokeAPI is used for getting information and images of the pokemon.
 
-## Code scaffolding
+## Content
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The project includes the files necessary for the project, as well the component tree for the application
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To install and configure the project on your own, follow these steps:
 
-## Running unit tests
+Clone the github repository: https://github.com/OzKara/PokemonTrainerApplication
+Install dependencies with "npm install"
+Deploy the API found here: https://gitlab.com/noroff-accelerate/javascript/projects/noroff-api/
+Configure an API key and add it to the an environment file
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Usage
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+After installing the project yourself, you can run it by using "ng serve -o"
